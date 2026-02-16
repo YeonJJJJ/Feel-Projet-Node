@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background:
+    radial-gradient(circle at center, rgba(120,0,0,0.5), #000 60%),
+    #000;
+  color: white;
+  min-height: 100vh;
+}
+
+.page {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 0;
+}
+
+/* ---------- TOP ---------- */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.badge {
+  color: #ffb3c7;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.regen {
+  color: #ddd;
+  cursor: pointer;
+}
+
+/* ---------- TITLES ---------- */
+
+.title {
+  font-size: 56px;
+  margin-bottom: 15px;
+}
+
+.title span {
+  background: linear-gradient(90deg, #ff0066, #ff4da6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #aaa;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+/* ---------- CARDS ---------- */
+
+.cards {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 220px;
+  border-radius: 16px;
+  padding: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 13px;
+  color: #ddd;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* Colors */
+.c1 { background: #3a1621; }
+.c2 { background: #1c1a44; }
+.c3 { background: #6b5633; }
+.c4 { background: #165c3c; }
+.c5 { background: #7a1d1d; }
+
+/* ---------- PLAYLIST DETAIL ---------- */
+
+.back {
+  font-size: 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.playlist-header {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.cover {
+  width: 220px;
+  border-radius: 12px;
+}
+
+.info h1 {
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+.label {
+  color: #aaa;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.info p {
+  color: #ccc;
+  font-size: 18px;
+}
+
+/* ---------- PLAY BUTTON ---------- */
+
+.play-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ff0066, #ff4da6);
+  color: black;
+  font-size: 26px;
+  cursor: pointer;
+  margin: 30px 0;
+}
+
+/* ---------- TABLE ---------- */
+
+.tracklist {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tracklist thead {
+  border-bottom: 1px solid #444;
+}
+
+.tracklist th {
+  text-align: left;
+  padding: 15px 10px;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.tracklist td {
+  padding: 18px 10px;
+  border-bottom: 1px solid #222;
+}
+
+.tracklist span {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.tracklist tr:hover {
+  background: rgba(255,255,255,0.05);
+}
