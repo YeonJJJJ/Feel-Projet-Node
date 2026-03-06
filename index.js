@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 let port = 3000;
 const getUsersRouter = require("./routes/getUsers");
+const addUsersRouter = require("./routes/addUsers");
 
 // Tell cors to stfu
 const corsOptions = {
@@ -24,6 +25,8 @@ app.use(
 
 // Routes
 app.use("/users", getUsersRouter);
+app.use("/addUsers", addUsersRouter);
+
 // app.get("/", (req, res) => {
 //   res.send("Je suis une saucisse");
 // });
