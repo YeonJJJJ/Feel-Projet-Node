@@ -3,8 +3,13 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 let port = 3000;
-const getUsersRouter = require("./routes/getUsers");
+const getMoodsRouter = require("./routes/getMoods");
 const addUsersRouter = require("./routes/addUsers");
+const loginUsersRouter = require("./routes/loginUsers");
+const addTrackRouter = require("./routes/addTrack");
+const generatePlaylistRouter = require("./routes/createPlaylist");
+const getUserPlaylistsRouter = require("./routes/getUserPlaylists");
+const getPlaylistTracksRouter = require("./routes/getPlaylistTracks");
 
 // Tell cors to stfu
 const corsOptions = {
@@ -24,8 +29,13 @@ app.use(
 );
 
 // Routes
-app.use("/users", getUsersRouter);
+app.use("/moods", getMoodsRouter);
 app.use("/addUsers", addUsersRouter);
+app.use("/login", loginUsersRouter);
+app.use("/addTrack", addTrackRouter);
+app.use("/playlists/generate", generatePlaylistRouter);
+app.use("/playlists/user", getUserPlaylistsRouter);
+app.use("/playlists", getPlaylistTracksRouter);
 
 // app.get("/", (req, res) => {
 //   res.send("Je suis une saucisse");
