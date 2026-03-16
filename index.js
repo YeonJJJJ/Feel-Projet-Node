@@ -7,7 +7,7 @@ const getMoodsRouter = require("./routes/getMoods");
 const addUsersRouter = require("./routes/addUsers");
 const loginUsersRouter = require("./routes/loginUsers");
 const addTrackRouter = require("./routes/addTrack");
-const generatePlaylistRouter = require("./routes/createPlaylist");
+const generatePlaylistRouter = require("./routes/generatePlaylist");
 const getUserPlaylistsRouter = require("./routes/getUserPlaylists");
 const getPlaylistTracksRouter = require("./routes/getPlaylistTracks");
 
@@ -29,21 +29,13 @@ app.use(
 );
 
 // Routes
-app.use("/moods", getMoodsRouter);
+app.use("/getMoods", getMoodsRouter);
 app.use("/addUsers", addUsersRouter);
 app.use("/login", loginUsersRouter);
 app.use("/addTrack", addTrackRouter);
 app.use("/playlists/generate", generatePlaylistRouter);
-app.use("/playlists/user", getUserPlaylistsRouter);
+app.use("/getPlaylists", getUserPlaylistsRouter);
 app.use("/playlists", getPlaylistTracksRouter);
-
-// app.get("/", (req, res) => {
-//   res.send("Je suis une saucisse");
-// });
-
-// app.get("/store", (req, res) => {
-//   res.send("Ceci est un store du cul");
-// });
 
 // Error Handler
 app.use((err, req, res, next) => {
