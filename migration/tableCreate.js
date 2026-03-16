@@ -36,7 +36,7 @@ const queries = [
     preview_url TEXT
 )`,
 
-`CREATE TABLE IF NOT EXISTS playlist_tracks (
+`CREATE TABLE IF NOT EXISTS playlists_tracks (
     playlist_id INT,
     track_id INT,
     PRIMARY KEY (playlist_id, track_id),

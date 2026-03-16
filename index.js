@@ -34,16 +34,8 @@ app.use("/addUsers", addUsersRouter);
 app.use("/login", loginUsersRouter);
 app.use("/addTrack", addTrackRouter);
 app.use("/playlists/generate", generatePlaylistRouter);
-app.use("/playlists/user", getUserPlaylistsRouter);
+app.use("/getPlaylists", getUserPlaylistsRouter);
 app.use("/playlists", getPlaylistTracksRouter);
-
-// app.get("/", (req, res) => {
-//   res.send("Je suis une saucisse");
-// });
-
-// app.get("/store", (req, res) => {
-//   res.send("Ceci est un store du cul");
-// });
 
 // Error Handler
 app.use((err, req, res, next) => {

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const playlistService = require("../services/generatePlaylist");
+const playlistService = require("../services/createPlaylist");
 
 router.post("/", async function(req, res, next) {
 
