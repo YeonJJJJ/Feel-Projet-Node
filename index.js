@@ -7,7 +7,7 @@ const getMoodsRouter = require("./routes/getMoods");
 const addUsersRouter = require("./routes/addUsers");
 const loginUsersRouter = require("./routes/loginUsers");
 const addTrackRouter = require("./routes/addTrack");
-const generatePlaylistRouter = require("./routes/createPlaylist");
+const generatePlaylistRouter = require("./routes/generatePlaylist");
 const getUserPlaylistsRouter = require("./routes/getUserPlaylists");
 const getPlaylistTracksRouter = require("./routes/getPlaylistTracks");
 
@@ -29,7 +29,7 @@ app.use(
 );
 
 // Routes
-app.use("/moods", getMoodsRouter);
+app.use("/getMoods", getMoodsRouter);
 app.use("/addUsers", addUsersRouter);
 app.use("/login", loginUsersRouter);
 app.use("/addTrack", addTrackRouter);
