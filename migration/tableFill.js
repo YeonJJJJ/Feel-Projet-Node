@@ -36,10 +36,21 @@ VALUES ('random','random@example.com','password123');
 `,
 
 `
-INSERT INTO moods
-(name, description)
-VALUES ('Happy', 'Feeling joyful and content'), ('Sad', 'Feeling down and blue'), ('Energetic', 'Feeling lively and full of energy');
-`,
+INSERT INTO moods (name, description) VALUES
+('Happy', 'Upbeat and cheerful tracks to lift your mood'),
+('Sad', 'Melancholic and emotional tracks'),
+('Energetic', 'High tempo tracks to get you moving'),
+('Nostalgic', 'Tracks that evoke memories and past times'),
+('Party', 'Songs perfect for celebrations and parties'),
+('Chill', 'Relaxed and laid-back tracks for unwinding'),
+('Romantic', 'Tracks perfect for love and romance'),
+('Focus', 'Music that helps you concentrate and study'),
+('Motivational', 'Tracks to inspire and pump you up'),
+('Melancholy', 'Soft and emotional songs to reflect'),
+('Adventure', 'Epic tracks for exploration and travel vibes'),
+('Sleepy', 'Calm tracks to help relax or fall asleep'),
+('Groovy', 'Funky and rhythmic tracks for a good vibe'),
+('Workout', 'Energetic music for exercise and fitness');`,
 
 ];
 

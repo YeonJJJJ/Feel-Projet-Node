@@ -169,7 +169,7 @@ h1 {
   margin-bottom: 18px;
 }
 
-.input-group input {
+.input-group input, .input-group input:hover {
   width: 100%;
   padding: 16px;
   border-radius: 12px;
