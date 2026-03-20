@@ -17,7 +17,6 @@ async function checkAuth() {
 
 // ─────────────────────────────────────────────
 // Images prédéfinies par nom de playlist
-// Seed picsum fixe pour chaque nom métaphorique
 // ─────────────────────────────────────────────
 const PLAYLIST_IMAGES = {
   // Happy
