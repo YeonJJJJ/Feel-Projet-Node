@@ -1,30 +1,182 @@
 // ─────────────────────────────────────────────
-// Auth check
+// Auth check — tout le code est dans init()
 // ─────────────────────────────────────────────
 async function checkAuth() {
   const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) { window.location.href = "/login"; return; }
+  if (!user) { window.location.href = "/login"; return false; }
   try {
     const res = await fetch(`http://localhost:3000/auth/check?userId=${user.id}`);
     const data = await res.json();
-    if (!data.valid) { localStorage.clear(); window.location.href = "/login"; }
-  } catch (err) { console.error("Auth check error:", err); }
+    if (!data.valid) { localStorage.clear(); window.location.href = "/login"; return false; }
+    return true;
+  } catch (err) {
+    console.error("Auth check error:", err);
+    return true; // En cas d'erreur réseau, on laisse passer
+  }
 }
-checkAuth();
 
-const moodNameSpan   = document.querySelector(".mood-name");
-const cardsContainer = document.getElementById("cards");
-const loader         = document.getElementById("loader");
-const regenBtn       = document.querySelector(".regen");
-const homeBtn        = document.querySelector(".home-btn");
-
-const moodId   = localStorage.getItem("selectedMoodId");
-const moodName = localStorage.getItem("selectedMoodName");
-const user     = JSON.parse(localStorage.getItem("user"));
-const userId   = user.id;
+// ─────────────────────────────────────────────
+// Images prédéfinies par nom de playlist
+// Seed picsum fixe pour chaque nom métaphorique
+// ─────────────────────────────────────────────
+const PLAYLIST_IMAGES = {
+  // Happy
+  "Golden Hour":          "https://picsum.photos/seed/golden-hour/300/300",
+  "Dancing In The Rain":  "https://picsum.photos/seed/dancing-rain/300/300",
+  "Sunday Morning":       "https://picsum.photos/seed/sunday-morning/300/300",
+  "Vitamin D":            "https://picsum.photos/seed/vitamin-d/300/300",
+  "Feels Like Summer":    "https://picsum.photos/seed/feels-summer/300/300",
+  "Bright Side":          "https://picsum.photos/seed/bright-side/300/300",
+  "Smile File":           "https://picsum.photos/seed/smile-file/300/300",
+  "Good News Only":       "https://picsum.photos/seed/good-news/300/300",
+  "Confetti":             "https://picsum.photos/seed/confetti-party/300/300",
+  "Peak Happiness":       "https://picsum.photos/seed/peak-happy/300/300",
+  // Sad
+  "Empty Rooms":          "https://picsum.photos/seed/empty-rooms/300/300",
+  "3AM Thoughts":         "https://picsum.photos/seed/3am-thoughts/300/300",
+  "Glass Half Empty":     "https://picsum.photos/seed/glass-half/300/300",
+  "After The Storm":      "https://picsum.photos/seed/after-storm/300/300",
+  "Quiet Tears":          "https://picsum.photos/seed/quiet-tears/300/300",
+  "Blue Hour":            "https://picsum.photos/seed/blue-hour/300/300",
+  "Unread Messages":      "https://picsum.photos/seed/unread-msg/300/300",
+  "Rain On Glass":        "https://picsum.photos/seed/rain-glass/300/300",
+  "Hollow":               "https://picsum.photos/seed/hollow-room/300/300",
+  "Overcast":             "https://picsum.photos/seed/overcast-sky/300/300",
+  // Energetic
+  "Full Send":            "https://picsum.photos/seed/full-send/300/300",
+  "Overdrive":            "https://picsum.photos/seed/overdrive/300/300",
+  "No Sleep Tonight":     "https://picsum.photos/seed/no-sleep/300/300",
+  "Adrenaline Rush":      "https://picsum.photos/seed/adrenaline/300/300",
+  "Chaos Theory":         "https://picsum.photos/seed/chaos-theory/300/300",
+  "Red Line":             "https://picsum.photos/seed/red-line/300/300",
+  "Static":               "https://picsum.photos/seed/static-noise/300/300",
+  "Ignition":             "https://picsum.photos/seed/ignition-fire/300/300",
+  "Wired":                "https://picsum.photos/seed/wired-up/300/300",
+  "Maximum Output":       "https://picsum.photos/seed/max-output/300/300",
+  // Nostalgic
+  "Faded Polaroids":      "https://picsum.photos/seed/faded-polaroids/300/300",
+  "My First MP3s":        "https://picsum.photos/seed/first-mp3/300/300",
+  "Burned CDs":           "https://picsum.photos/seed/burned-cds/300/300",
+  "Summer of 99":         "https://picsum.photos/seed/summer-99/300/300",
+  "Analog Memories":      "https://picsum.photos/seed/analog-mem/300/300",
+  "Old Bookmarks":        "https://picsum.photos/seed/old-bookmarks/300/300",
+  "Rewind":               "https://picsum.photos/seed/rewind-tape/300/300",
+  "Disposable Camera":    "https://picsum.photos/seed/disposable-cam/300/300",
+  "Lost Frequencies":     "https://picsum.photos/seed/lost-freq/300/300",
+  "Childhood Bedroom":    "https://picsum.photos/seed/childhood-room/300/300",
+  // Party
+  "Pre-Game Ritual":      "https://picsum.photos/seed/pregame/300/300",
+  "Night Bus Home":       "https://picsum.photos/seed/night-bus/300/300",
+  "3AM Banger":           "https://picsum.photos/seed/3am-banger/300/300",
+  "Main Character":       "https://picsum.photos/seed/main-char/300/300",
+  "Lights Out":           "https://picsum.photos/seed/lights-out/300/300",
+  "Open Bar":             "https://picsum.photos/seed/open-bar/300/300",
+  "Dance Floor Physics":  "https://picsum.photos/seed/dancefloor/300/300",
+  "Last Round":           "https://picsum.photos/seed/last-round/300/300",
+  "Afterglow":            "https://picsum.photos/seed/afterglow/300/300",
+  "Headliner":            "https://picsum.photos/seed/headliner/300/300",
+  // Chill
+  "Slow Morning":         "https://picsum.photos/seed/slow-morning/300/300",
+  "Café Window Seat":     "https://picsum.photos/seed/cafe-window/300/300",
+  "Soft Landing":         "https://picsum.photos/seed/soft-landing/300/300",
+  "Day Dreamer":          "https://picsum.photos/seed/day-dreamer/300/300",
+  "Half Awake":           "https://picsum.photos/seed/half-awake/300/300",
+  "Houseplant Hours":     "https://picsum.photos/seed/houseplant/300/300",
+  "Still Water":          "https://picsum.photos/seed/still-water/300/300",
+  "Sunday Ritual":        "https://picsum.photos/seed/sunday-ritual/300/300",
+  "Fade In":              "https://picsum.photos/seed/fade-in/300/300",
+  "Low Gravity":          "https://picsum.photos/seed/low-gravity/300/300",
+  // Romantic
+  "Candlelight":          "https://picsum.photos/seed/candlelight/300/300",
+  "First Dance":          "https://picsum.photos/seed/first-dance/300/300",
+  "Written In The Stars": "https://picsum.photos/seed/written-stars/300/300",
+  "Velvet Curtains":      "https://picsum.photos/seed/velvet-curtains/300/300",
+  "Late Night Drive":     "https://picsum.photos/seed/late-drive/300/300",
+  "Last Song":            "https://picsum.photos/seed/last-song/300/300",
+  "Slow Burn":            "https://picsum.photos/seed/slow-burn/300/300",
+  "Close Your Eyes":      "https://picsum.photos/seed/close-eyes/300/300",
+  "Love Letter":          "https://picsum.photos/seed/love-letter/300/300",
+  "Dusk":                 "https://picsum.photos/seed/dusk-light/300/300",
+  // Focus
+  "Deep Work":            "https://picsum.photos/seed/deep-work/300/300",
+  "Flow State":           "https://picsum.photos/seed/flow-state/300/300",
+  "Brain Fuel":           "https://picsum.photos/seed/brain-fuel/300/300",
+  "The Zone":             "https://picsum.photos/seed/the-zone/300/300",
+  "Locked In":            "https://picsum.photos/seed/locked-in/300/300",
+  "Signal / Noise":       "https://picsum.photos/seed/signal-noise/300/300",
+  "Render Farm":          "https://picsum.photos/seed/render-farm/300/300",
+  "White Room":           "https://picsum.photos/seed/white-room/300/300",
+  "Tunnel Vision":        "https://picsum.photos/seed/tunnel-vision/300/300",
+  "Loading...":           "https://picsum.photos/seed/loading-screen/300/300",
+  // Motivational
+  "Rise & Grind":         "https://picsum.photos/seed/rise-grind/300/300",
+  "No Excuses":           "https://picsum.photos/seed/no-excuses/300/300",
+  "Comeback Kid":         "https://picsum.photos/seed/comeback-kid/300/300",
+  "Prove Them Wrong":     "https://picsum.photos/seed/prove-wrong/300/300",
+  "One More Rep":         "https://picsum.photos/seed/one-more-rep/300/300",
+  "Underdog":             "https://picsum.photos/seed/underdog/300/300",
+  "Level Up":             "https://picsum.photos/seed/level-up/300/300",
+  "Built Different":      "https://picsum.photos/seed/built-diff/300/300",
+  "Relentless":           "https://picsum.photos/seed/relentless/300/300",
+  "Zero To One":          "https://picsum.photos/seed/zero-one/300/300",
+  // Melancholy
+  "Soft Echoes":          "https://picsum.photos/seed/soft-echoes/300/300",
+  "Grey Skies":           "https://picsum.photos/seed/grey-skies/300/300",
+  "The Long Way Home":    "https://picsum.photos/seed/long-way/300/300",
+  "Bittersweet":          "https://picsum.photos/seed/bittersweet/300/300",
+  "Fog":                  "https://picsum.photos/seed/fog-morning/300/300",
+  "Off Season":           "https://picsum.photos/seed/off-season/300/300",
+  "Understated":          "https://picsum.photos/seed/understated/300/300",
+  "Washed Out":           "https://picsum.photos/seed/washed-out/300/300",
+  "Slow Dissolve":        "https://picsum.photos/seed/slow-dissolve/300/300",
+  // Adventure
+  "Into The Unknown":     "https://picsum.photos/seed/into-unknown/300/300",
+  "Open Road":            "https://picsum.photos/seed/open-road/300/300",
+  "Horizon Chaser":       "https://picsum.photos/seed/horizon/300/300",
+  "Uncharted":            "https://picsum.photos/seed/uncharted/300/300",
+  "Wanderlust":           "https://picsum.photos/seed/wanderlust/300/300",
+  "Trailblazer":          "https://picsum.photos/seed/trailblazer/300/300",
+  "Last Known Position":  "https://picsum.photos/seed/last-position/300/300",
+  "First Light":          "https://picsum.photos/seed/first-light/300/300",
+  "Elevation":            "https://picsum.photos/seed/elevation/300/300",
+  "Edge of the Map":      "https://picsum.photos/seed/edge-map/300/300",
+  // Sleepy
+  "Drift Away":           "https://picsum.photos/seed/drift-away/300/300",
+  "Stargazing":           "https://picsum.photos/seed/stargazing/300/300",
+  "Counting Clouds":      "https://picsum.photos/seed/counting-clouds/300/300",
+  "Pillow Talk":          "https://picsum.photos/seed/pillow-talk/300/300",
+  "Last Light":           "https://picsum.photos/seed/last-light/300/300",
+  "Slowdown":             "https://picsum.photos/seed/slowdown/300/300",
+  "Dissolve":             "https://picsum.photos/seed/dissolve/300/300",
+  "Night Mode":           "https://picsum.photos/seed/night-mode/300/300",
+  "Half Dreaming":        "https://picsum.photos/seed/half-dream/300/300",
+  "Goodnight":            "https://picsum.photos/seed/goodnight/300/300",
+  // Groovy
+  "Silk & Bass":          "https://picsum.photos/seed/silk-bass/300/300",
+  "Head Nodder":          "https://picsum.photos/seed/head-nodder/300/300",
+  "Velvet Underground":   "https://picsum.photos/seed/velvet-underground/300/300",
+  "Pocket Rocket":        "https://picsum.photos/seed/pocket-rocket/300/300",
+  "The Good Stuff":       "https://picsum.photos/seed/good-stuff/300/300",
+  "Butter":               "https://picsum.photos/seed/butter-smooth/300/300",
+  "Soulful Sunday":       "https://picsum.photos/seed/soulful-sun/300/300",
+  "Low & Slow":           "https://picsum.photos/seed/low-slow/300/300",
+  "In The Pocket":        "https://picsum.photos/seed/in-pocket/300/300",
+  "Wax & Vinyl":          "https://picsum.photos/seed/wax-vinyl/300/300",
+  // Workout
+  "Beast Mode":           "https://picsum.photos/seed/beast-mode/300/300",
+  "No Pain No Gain":      "https://picsum.photos/seed/no-pain/300/300",
+  "Iron Will":            "https://picsum.photos/seed/iron-will/300/300",
+  "Sweat It Out":         "https://picsum.photos/seed/sweat-out/300/300",
+  "Last Set":             "https://picsum.photos/seed/last-set/300/300",
+  "PR Day":               "https://picsum.photos/seed/pr-day/300/300",
+  "Grind Season":         "https://picsum.photos/seed/grind-season/300/300",
+  "Tempo":                "https://picsum.photos/seed/tempo-run/300/300",
+  "Raw":                  "https://picsum.photos/seed/raw-energy/300/300",
+  "Max Effort":           "https://picsum.photos/seed/max-effort/300/300",
+};
 
 const MOOD_NAMES = {
-  Happy:        ["Golden Hour", "Dancing In The Rain", "Sunday Morning", "Vitamin", "Feels Like Summer", "Bright Side", "Smile File", "Good News Only", "Confetti", "Peak Happiness"],
+  Happy:        ["Golden Hour", "Dancing In The Rain", "Sunday Morning", "Vitamin D", "Feels Like Summer", "Bright Side", "Smile File", "Good News Only", "Confetti", "Peak Happiness"],
   Sad:          ["Empty Rooms", "3AM Thoughts", "Glass Half Empty", "After The Storm", "Quiet Tears", "Blue Hour", "Unread Messages", "Rain On Glass", "Hollow", "Overcast"],
   Energetic:    ["Full Send", "Overdrive", "No Sleep Tonight", "Adrenaline Rush", "Chaos Theory", "Red Line", "Static", "Ignition", "Wired", "Maximum Output"],
   Nostalgic:    ["Faded Polaroids", "My First MP3s", "Burned CDs", "Summer of 99", "Analog Memories", "Old Bookmarks", "Rewind", "Disposable Camera", "Lost Frequencies", "Childhood Bedroom"],
@@ -83,7 +235,12 @@ function getDisplayData(moodName, count) {
   const colors = MOOD_COLORS[moodName] || ["#333", "#444", "#555", "#666", "#777"];
   const shuffledNames = [...names].sort(() => Math.random() - 0.5).slice(0, count);
   const shuffledDescs = [...descs].sort(() => Math.random() - 0.5).slice(0, count);
-  const data = shuffledNames.map((name, i) => ({ name, description: shuffledDescs[i] || "", color: colors[i % colors.length] }));
+  const data = shuffledNames.map((name, i) => ({
+    name,
+    description: shuffledDescs[i] || "",
+    color: colors[i % colors.length],
+    image: PLAYLIST_IMAGES[name] || `https://picsum.photos/seed/${encodeURIComponent(name)}/300/300`,
+  }));
   localStorage.setItem(storageKey, JSON.stringify(data));
   return data;
 }
@@ -97,70 +254,88 @@ function storePlaylistData(playlistId, imgSrc, name, description) {
   localStorage.setItem("playlistNames", JSON.stringify(names));
 }
 
-moodNameSpan.innerText = `"${moodName}"`;
+// ─────────────────────────────────────────────
+// Init — tout s'exécute après auth check
+// ─────────────────────────────────────────────
+async function init() {
+  const valid = await checkAuth();
+  if (!valid) return;
 
-if (homeBtn) { homeBtn.addEventListener("click", () => { window.location.href = "/home"; }); }
+  const moodNameSpan   = document.querySelector(".mood-name");
+  const cardsContainer = document.getElementById("cards");
+  const loader         = document.getElementById("loader");
+  const regenBtn       = document.querySelector(".regen");
+  const homeBtn        = document.querySelector(".home-btn");
+  const accountBtn      = document.getElementById("account-btn");
+  const accountDropdown = document.getElementById("account-dropdown");
+  const accountAvatar   = document.getElementById("account-avatar");
+  const accountName     = document.getElementById("account-name");
+  const logoutItem      = document.getElementById("logout-btn");
 
-function showLoader() { loader.style.display = "flex"; cardsContainer.style.display = "none"; }
-function hideLoader() { loader.style.display = "none"; cardsContainer.style.display = "flex"; }
+  const moodId   = localStorage.getItem("selectedMoodId");
+  const moodName = localStorage.getItem("selectedMoodName");
+  const user     = JSON.parse(localStorage.getItem("user"));
+  const userId   = user.id;
 
-async function renderPlaylists(playlists) {
-  cardsContainer.innerHTML = "";
-  if (!playlists || playlists.length === 0) { cardsContainer.innerHTML = "<p>Aucune playlist disponible.</p>"; hideLoader(); return; }
-  const displayData = getDisplayData(moodName, playlists.length);
-  for (let index = 0; index < playlists.length; index++) {
-    const playlist = playlists[index];
-    const d = displayData[index];
-    const imgSrc = `https://picsum.photos/seed/${encodeURIComponent(d.name)}-${playlist.id}/300/300`;
-    storePlaylistData(playlist.id, imgSrc, d.name, d.description);
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style.background = d.color;
-    card.innerHTML = `<img src="${imgSrc}" alt="${d.name}"><h3>${d.name}</h3><p>${d.description}</p>`;
-    card.addEventListener("click", () => goToTracks(playlist.id, index));
-    cardsContainer.appendChild(card);
+  moodNameSpan.innerText = `"${moodName}"`;
+
+  if (homeBtn) { homeBtn.addEventListener("click", () => { window.location.href = "/home"; }); }
+
+  // Account dropdown
+  if (user) { accountAvatar.innerText = user.username.charAt(0).toUpperCase(); accountName.innerText = user.username; }
+  accountBtn.addEventListener("click", (e) => { e.stopPropagation(); accountDropdown.classList.toggle("open"); });
+  document.addEventListener("click", () => { accountDropdown.classList.remove("open"); });
+  logoutItem.addEventListener("click", () => { localStorage.clear(); window.location.href = "/login"; });
+
+  function showLoader() { loader.style.display = "flex"; cardsContainer.style.display = "none"; }
+  function hideLoader() { loader.style.display = "none"; cardsContainer.style.display = "flex"; }
+
+  async function renderPlaylists(playlists) {
+    cardsContainer.innerHTML = "";
+    if (!playlists || playlists.length === 0) { cardsContainer.innerHTML = "<p>Aucune playlist disponible.</p>"; hideLoader(); return; }
+    const displayData = getDisplayData(moodName, playlists.length);
+    for (let index = 0; index < playlists.length; index++) {
+      const playlist = playlists[index];
+      const d = displayData[index];
+      const imgSrc = d.image;
+      storePlaylistData(playlist.id, imgSrc, d.name, d.description);
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.background = d.color;
+      card.innerHTML = `<img src="${imgSrc}" alt="${d.name}"><h3>${d.name}</h3><p>${d.description}</p>`;
+      card.addEventListener("click", () => goToTracks(playlist.id, index));
+      cardsContainer.appendChild(card);
+    }
+    hideLoader();
   }
-  hideLoader();
+
+  function loadPlaylists() {
+    showLoader();
+    fetch(`http://localhost:3000/playlists/user?userId=${userId}&moodId=${moodId}`)
+      .then(res => res.json())
+      .then(json => renderPlaylists(json.data))
+      .catch(err => { console.error("Erreur chargement playlists :", err); hideLoader(); });
+  }
+
+  function goToTracks(playlistId, index) {
+    localStorage.setItem("selectedPlaylistId", playlistId);
+    localStorage.setItem("selectedPlaylistIndex", index);
+    window.location.href = "/playlist2";
+  }
+
+  regenBtn.addEventListener("click", async () => {
+    regenBtn.textContent = "Generating...";
+    regenBtn.style.pointerEvents = "none";
+    showLoader();
+    localStorage.removeItem(`displayData_${moodName}`);
+    try {
+      await fetch("http://localhost:3000/playlists/generate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId, moodId }) });
+      loadPlaylists();
+    } catch (error) { console.error("Erreur régénération :", error); hideLoader(); }
+    finally { regenBtn.textContent = "Regenerate"; regenBtn.style.pointerEvents = "auto"; }
+  });
+
+  loadPlaylists();
 }
 
-function loadPlaylists() {
-  showLoader();
-  fetch(`http://localhost:3000/playlists/user?userId=${userId}&moodId=${moodId}`)
-    .then(res => res.json())
-    .then(json => renderPlaylists(json.data))
-    .catch(err => { console.error("Erreur chargement playlists :", err); hideLoader(); });
-}
-
-function goToTracks(playlistId, index) {
-  localStorage.setItem("selectedPlaylistId", playlistId);
-  localStorage.setItem("selectedPlaylistIndex", index);
-  window.location.href = "/playlist2";
-}
-
-regenBtn.addEventListener("click", async () => {
-  regenBtn.textContent = "Generating...";
-  regenBtn.style.pointerEvents = "none";
-  showLoader();
-  localStorage.removeItem(`displayData_${moodName}`);
-  try {
-    await fetch("http://localhost:3000/playlists/generate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId, moodId }) });
-    loadPlaylists();
-  } catch (error) { console.error("Erreur régénération :", error); hideLoader(); }
-  finally { regenBtn.textContent = "Regenerate"; regenBtn.style.pointerEvents = "auto"; }
-});
-
-loadPlaylists();
-
-// ─────────────────────────────────────────────
-// Account dropdown
-// ─────────────────────────────────────────────
-const accountBtn      = document.getElementById("account-btn");
-const accountDropdown = document.getElementById("account-dropdown");
-const accountAvatar   = document.getElementById("account-avatar");
-const accountName     = document.getElementById("account-name");
-const logoutItem      = document.getElementById("logout-btn");
-
-if (user) { accountAvatar.innerText = user.username.charAt(0).toUpperCase(); accountName.innerText = user.username; }
-accountBtn.addEventListener("click", (e) => { e.stopPropagation(); accountDropdown.classList.toggle("open"); });
-document.addEventListener("click", () => { accountDropdown.classList.remove("open"); });
-logoutItem.addEventListener("click", () => { localStorage.clear(); window.location.href = "/login"; });
+init();
