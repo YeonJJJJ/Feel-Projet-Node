@@ -41,10 +41,7 @@ INSERT INTO moods (name, description) VALUES
 ('Focus', 'Music that helps you concentrate and study'),
 ('Motivational', 'Tracks to inspire and pump you up'),
 ('Melancholy', 'Soft and emotional songs to reflect'),
-('Adventure', 'Epic tracks for exploration and travel vibes'),
-('Sleepy', 'Calm tracks to help relax or fall asleep'),
-('Groovy', 'Funky and rhythmic tracks for a good vibe'),
-('Workout', 'Energetic music for exercise and fitness');`,
+('Sleepy', 'Calm tracks to help relax or fall asleep');`,
 
 ];
 
