@@ -1,16 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const playlistService = require("../services/getPlaylistTracks");
+const playlistTracksService = require("../services/getPlaylistTracks");
 
-router.get("/:playlistId", async function (req, res, next) {
+// GET /playlists/tracks?playlistId=1
+router.get("/tracks", async function (req, res, next) {
   try {
 
-    const result = await playlistService.getPlaylistTracks(req.params.playlistId);
+    const { playlistId } = req.query;
+
+    if (!playlistId) {
+      return res.status(400).json({ message: "playlistId manquant" });
+    }
+
+    const result = await playlistTracksService.getPlaylistTracks(playlistId);
 
     res.json(result);
 
   } catch (err) {
-    console.error(`Error while getting playlist tracks`, err.message);
+    console.error("Error while getting playlist tracks", err.message);
     next(err);
   }
 });

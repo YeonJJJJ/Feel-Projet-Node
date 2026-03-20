@@ -1,14 +1,3 @@
-/*
-:root{
-    --background : #010100;
-}
-
-.archivo-black-regular {
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}*/
-
 * {
   margin: 0;
   padding: 0;
@@ -21,8 +10,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* Background noir + dégradé rouge */
   background:
     radial-gradient(circle at center, rgba(120, 0, 0, 0.5), #000 60%),
     #000;
@@ -81,7 +68,7 @@ h1 {
 
 /* Input */
 .input-box {
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
 .input-box input {
@@ -105,18 +92,47 @@ h1 {
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* Suggestion en temps réel */
+.mood-suggestion {
+  display: none;
+  margin-top: 12px;
+  margin-bottom: 28px;
+  font-size: 14px;
+  color: #b3b3b3;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  text-align: left;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 77, 166, 0.25);
+  background: rgba(255, 0, 102, 0.06);
+}
+
+.mood-suggestion:hover {
+  color: white;
+  border-color: rgba(255, 77, 166, 0.6);
+  background: rgba(255, 0, 102, 0.12);
+  transform: translateY(-1px);
+}
+
+.mood-suggestion strong {
+  color: #ff4da6;
+  font-weight: 600;
+}
+
 /* Chips */
-.mood {
+.chips {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
+  margin-bottom: 48px;
 }
 
-.mood .mood-item {
-  padding: 14px 20px;
+.chips button {
+  padding: 12px 20px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background: transparent;
   color: #d1d1d1;
   font-size: 14px;
@@ -124,9 +140,121 @@ h1 {
   transition: 0.25s;
 }
 
-.mood .mood-item:hover {
+.chips button:hover {
   border-color: #ff4da6;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 0 20px rgba(255, 0, 102, 0.3);
+}
+
+.chips button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Bouton déconnexion */
+.logout {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #b3b3b3;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.25s;
+  letter-spacing: 0.03em;
+}
+
+.logout:hover {
+  border-color: rgba(255, 77, 166, 0.5);
+  color: #ff4da6;
+  background: rgba(255, 0, 102, 0.08);
+}
+
+
+/* ---------- DASHBOARD ---------- */
+
+.account-menu {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 50;
+}
+ 
+.account-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+ 
+.account-btn:hover {
+  border-color: rgba(255,77,166,0.5);
+  background: rgba(255,0,102,0.08);
+}
+ 
+.account-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff0066, #ff4da6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+ 
+.account-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 160px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+ 
+.account-dropdown.open {
+  display: block;
+}
+ 
+.account-dropdown a,
+.account-dropdown .logout-item {
+  display: block;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #d1d1d1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.15s;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+ 
+.account-dropdown a:hover,
+.account-dropdown .logout-item:hover {
+  background: rgba(255,255,255,0.06);
+  color: white;
+}
+ 
+.account-dropdown .logout-item {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  color: #ff4da6;
 }

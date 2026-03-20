@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Playlist</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -12,21 +12,21 @@
   <div class="back">←</div>
 
   <div class="playlist-header">
-
     <img class="cover" src="https://picsum.photos/300?6">
-
     <div class="info">
       <span class="label">PLAYLIST</span>
       <h1>Day Dreamer</h1>
       <p>Gentle tracks for when your mind wanders back.</p>
     </div>
-
   </div>
 
-  <button class="play-btn">▶</button>
+  <!-- Boutons côte à côte -->
+  <div class="action-btns">
+    <button class="play-btn">▶</button>
+    <button class="fav-btn">♡ Add to favorites</button>
+  </div>
 
   <table class="tracklist">
-
     <thead>
       <tr>
         <th>#</th>
@@ -35,43 +35,23 @@
         <th></th>
       </tr>
     </thead>
-
-    <tbody>
-
-      <tr>
-        <td>1</td>
-        <td>
-          <strong>Sailor Song</strong><br>
-          <span>Gigi Perz</span>
-        </td>
-        <td>Sailor Song</td>
-        <td>3:31</td>
-      </tr>
-
-      <tr>
-        <td>2</td>
-        <td>
-          <strong>Run</strong><br>
-          <span>Ludovico Einaudi</span>
-        </td>
-        <td>In A Time Lapse</td>
-        <td>5:32</td>
-      </tr>
-
-      <tr>
-        <td>3</td>
-        <td>
-          <strong>Chamber Of Reflection</strong><br>
-          <span>Mac DeMarco</span>
-        </td>
-        <td>Salad Days</td>
-        <td>3:51</td>
-      </tr>
-
-    </tbody>
-
+    <tbody></tbody>
   </table>
 
 </div>
+
+<div class="account-menu">
+  <button class="account-btn" id="account-btn">
+    <span class="account-avatar" id="account-avatar"></span>
+    <span id="account-name"></span>
+    ▾
+  </button>
+  <div class="account-dropdown" id="account-dropdown">
+    <a href="/dashboard">Dashboard</a>
+    <button class="logout-item" id="logout-btn">Sign out</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

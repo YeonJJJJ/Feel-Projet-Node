@@ -1,13 +1,17 @@
 const mysql = require("mysql2/promise");
 const config = require("../config");
 
-async function query(sql, params) {
-  const connection = await mysql.createConnection(config.db);
-  const [results] = await connection.execute(sql, params);
+// Crée un pool unique au démarrage du serveur
+const pool = mysql.createPool({
+  ...config.db,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 
+async function query(sql, params) {
+  const [results] = await pool.execute(sql, params);
   return results;
 }
 
-module.exports = {
-  query,
-};
+module.exports = { query };

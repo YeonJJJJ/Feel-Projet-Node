@@ -1,19 +1,18 @@
 const db = require("./db");
+const crypto = require("crypto");
+
+function hashPassword(password) {
+  return crypto.createHash("sha256").update(password).digest("hex");
+}
 
 async function addUser(user) {
 
-  const sql = `
-    INSERT INTO users (username, email, password)
-    VALUES (?, ?, ?)
-  `;
+  const hashedPassword = hashPassword(user.password);
 
-  const params = [
-    user.username,
-    user.email,
-    user.password
-  ];
-
-  const result = await db.query(sql, params);
+  const result = await db.query(
+    `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`,
+    [user.username, user.email, hashedPassword]
+  );
 
   return {
     message: "User created successfully",
@@ -21,6 +20,4 @@ async function addUser(user) {
   };
 }
 
-module.exports = {
-  addUser
-};
+module.exports = { addUser };

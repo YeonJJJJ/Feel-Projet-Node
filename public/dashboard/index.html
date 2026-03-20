@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feel — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/dashboard/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="dash-header">
+    <div class="dash-logo">
+      <div class="icon">🎵</div>
+      <span>Feel</span>
+    </div>
+    <div class="dash-actions">
+      <a href="/home" class="btn-back">← Back to Home</a>
+      <button class="btn-logout">Sign out</button>
+    </div>
+  </header>
+
+  <main class="dash-main">
+
+    <!-- Profil -->
+    <section class="dash-section profile-section">
+      <div class="avatar" id="avatar"></div>
+      <div class="profile-info">
+        <h1 id="profile-username">...</h1>
+        <p id="profile-email">...</p>
+        <span id="profile-since">...</span>
+      </div>
+      <button class="btn-danger" id="delete-account">Delete account</button>
+    </section>
+
+    <!-- Mood History -->
+    <section class="dash-section">
+      <h2 class="section-title">Your Moods</h2>
+      <div class="mood-chips" id="mood-history"></div>
+    </section>
+
+    <!-- Favoris -->
+    <section class="dash-section">
+      <h2 class="section-title">Favorites</h2>
+      <div class="playlist-grid" id="favorites-grid"></div>
+    </section>
+
+    <!-- Playlists récentes -->
+    <section class="dash-section">
+      <h2 class="section-title">Recently Generated</h2>
+      <div class="playlist-grid" id="recent-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Modal confirmation suppression -->
+  <div class="modal" id="delete-modal">
+    <div class="modal-box">
+      <h3>Delete your account?</h3>
+      <p>This will permanently delete your account and all your playlists. This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancel-delete">Cancel</button>
+        <button class="btn-danger" id="confirm-delete">Yes, delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

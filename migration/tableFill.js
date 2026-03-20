@@ -30,12 +30,6 @@ const con = mysql.createConnection(config.db);
 
 const queries = [
 `
-INSERT INTO users
-(username, email, password) 
-VALUES ('random','random@example.com','password123');
-`,
-
-`
 INSERT INTO moods (name, description) VALUES
 ('Happy', 'Upbeat and cheerful tracks to lift your mood'),
 ('Sad', 'Melancholic and emotional tracks'),

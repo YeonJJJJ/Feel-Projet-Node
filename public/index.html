@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css" />   
+    <link rel="stylesheet" href="style.css" />   
     <title>Feel - Accueil</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +41,20 @@
     </div>
 
   </div>
+
+  <div class="account-menu">
+  <button class="account-btn" id="account-btn">
+    <span class="account-avatar" id="account-avatar"></span>
+    <span id="account-name"></span>
+    ▾
+  </button>
+  <div class="account-dropdown" id="account-dropdown">
+    <a href="/dashboard">Dashboard</a>
+    <button class="logout-item" id="logout-btn">Sign out</button>
+  </div>
+</div>
+
+<!--<button class="logout">Se déconnecter</button>-->
 <script src="script.js"></script>
 </body>
 </html>
