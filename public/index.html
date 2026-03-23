@@ -1,46 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css" />   
-    <title>Feel - Accueil</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Connexion - Feel</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
+<div class="auth-container">
+
+  <div class="auth-card">
 
     <div class="logo">
       <div class="icon">🎵</div>
       <span>Feel</span>
     </div>
 
-    <h1>
-      How are you <span class="highlight">feeling</span><br />
-      today?
-    </h1>
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Login to continue your musical journey</p>
 
-    <p class="subtitle">
-      Tell us your mood and we'll craft the perfect playlist for you.
+    <form onsubmit="login(event)">
+
+      <div class="input-group">
+        <input id="email" type="email" placeholder="Email" required>
+      </div>
+
+      <div class="input-group">
+        <input id="password" type="password" placeholder="Password" required>
+      </div>
+
+      <button class="btn-primary">Login</button>
+
+    </form>
+
+    <p class="switch">
+      Don’t have an account?
+      <a href="../signup">Sign up</a>
     </p>
 
-    <div class="input-box">
-      <input type="text" placeholder="I’m feeling..." />
-    </div>
-
-    <div class="chips">
-      <button>Happy and energetic</button>
-      <button>Feeling nostalgic</button>
-      <button>Sad and reflective</button>
-      <button>Ready to party</button>
-      <button>Chill and relaxed</button>
-      <button>Focused and motivated</button>
-    </div>
-
   </div>
+
+</div>
+<script src="script.js"></script>
 
 </body>
 </html>

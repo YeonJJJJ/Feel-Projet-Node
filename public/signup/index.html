@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Créer un compte - Feel</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -21,46 +21,36 @@
 
     <form onsubmit="signup(event)">
 
-      <div class="input-group">
-        <input type="text" placeholder="Username" required>
-      </div>
+  <div class="input-group">
+    <input id="username" type="text" placeholder="Username" required>
+  </div>
 
-      <div class="input-group">
-        <input type="email" placeholder="Email" required>
-      </div>
+  <div class="input-group">
+    <input id="email" type="email" placeholder="Email" required>
+  </div>
 
-      <div class="input-group">
-        <input type="password" placeholder="Password" required>
-      </div>
+  <div class="input-group">
+    <input id="password" type="password" placeholder="Password" required>
+  </div>
 
-      <div class="input-group">
-        <input type="password" placeholder="Confirm password" required>
-      </div>
+  <div class="input-group">
+    <input id="confirmPassword" type="password" placeholder="Confirm password" required>
+  </div>
 
-      <button class="btn-primary">Create account</button>
+  <button class="btn-primary">Create account</button>
 
-    </form>
+</form>
+
 
     <p class="switch">
       Already have an account?
-      <a href="">Login</a>
+      <a href="../login/index.html">Login</a>
     </p>
 
   </div>
 
 </div>
 
-<script>
-function signup(e) {
-  e.preventDefault();
-
-  // Simulation création compte
-  localStorage.setItem("user", "connected");
-
-  // Redirection vers app
-  window.location.href = "index.html";
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@ const queries = [
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     name VARCHAR(150),
+    description TEXT,
     mood_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
@@ -36,7 +37,7 @@ const queries = [
     preview_url TEXT
 )`,
 
-`CREATE TABLE IF NOT EXISTS playlist_tracks (
+`CREATE TABLE IF NOT EXISTS playlists_tracks (
     playlist_id INT,
     track_id INT,
     PRIMARY KEY (playlist_id, track_id),
@@ -50,13 +51,22 @@ const queries = [
     PRIMARY KEY (mood_id, track_id),
     FOREIGN KEY (mood_id) REFERENCES moods(id),
     FOREIGN KEY (track_id) REFERENCES tracks(id)
-)`
+)`,
+
+`CREATE TABLE IF NOT EXISTS favorites (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      playlist_id INT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY unique_favorite (user_id, playlist_id),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (playlist_id) REFERENCES playlists(id) ON DELETE CASCADE
+    )
+  `
 ];
 
 con.connect(err => {
     if (err) throw err;
-    console.log("Connected");
-
     queries.forEach(sql => {
         con.query(sql, err => {
             if (err) throw err;

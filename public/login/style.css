@@ -1,19 +1,8 @@
-/*
-:root{
-    --background : #010100;
-}
-
-.archivo-black-regular {
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}*/
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -21,8 +10,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* Background noir + dégradé rouge */
   background:
     radial-gradient(circle at center, rgba(120, 0, 0, 0.5), #000 60%),
     #000;
@@ -63,6 +50,7 @@ h1 {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 20px;
+  font-family : "Archivo Black", sans-serif;
 }
 
 .highlight {
@@ -132,7 +120,7 @@ h1 {
 }
 
 
-/* ================= AUTH ================= */
+/* AUTH */
 
 .auth-container {
   min-height: 100vh;
@@ -169,7 +157,7 @@ h1 {
   margin-bottom: 18px;
 }
 
-.input-group input {
+.input-group input, .input-group input:hover {
   width: 100%;
   padding: 16px;
   border-radius: 12px;

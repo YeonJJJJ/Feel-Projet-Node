@@ -3,60 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <title>Playlists</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="page">
-
+<a class="home-btn">← ACCUEIL</a>
   <div class="top-bar">
     <span class="badge">✦ CURATED FOR YOUR MOOD</span>
     <a class="regen">Regenerate</a>
   </div>
 
   <h1 class="title">
-    Playlists for <span>“Feeling nostalgic”</span>
+    Playlists for <span class="mood-name"></span>
   </h1>
 
   <p class="subtitle">
     We've crafted these playlists just for you. Tap any to start listening.
   </p>
 
-  <div class="cards">
-
-    <div class="card c1">
-      <img src="https://picsum.photos/300?1">
-      <h3>Faded Polaroids</h3>
-      <p>Messy youth, loud nights...</p>
-    </div>
-
-    <div class="card c2">
-      <img src="https://picsum.photos/300?2">
-      <h3>My First MP3s</h3>
-      <p>The songs you downloaded...</p>
-    </div>
-
-    <div class="card c3">
-      <img src="https://picsum.photos/300?3">
-      <h3>Soft Echoes</h3>
-      <p>Quiet tracks that stay...</p>
-    </div>
-
-    <div class="card c4">
-      <img src="https://picsum.photos/300?4">
-      <h3>Burned CDs</h3>
-      <p>Distorted guitars...</p>
-    </div>
-
-    <div class="card c5">
-      <img src="https://picsum.photos/300?5">
-      <h3>Day dreamer</h3>
-      <p>Gentle tracks for when...</p>
-    </div>
-
+  <div class="loader" id="loader">
+    <div class="loader-spinner"></div>
+    <p>Crafting your playlists...</p>
   </div>
+
+  <div class="cards" id="cards" style="display: none;"></div>
 
 </div>
 
+<div class="account-menu">
+  <button class="account-btn" id="account-btn">
+    <span class="account-avatar" id="account-avatar"></span>
+    <span id="account-name"></span>
+    ▾
+  </button>
+  <div class="account-dropdown" id="account-dropdown">
+    <a href="/dashboard">Dashboard</a>
+    <button class="logout-item" id="logout-btn">Sign out</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
