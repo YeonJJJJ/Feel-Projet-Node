@@ -2,7 +2,6 @@ const db = require("./db");
 
 async function addFavorite(userId, playlistId) {
 
-  // INSERT IGNORE évite les doublons grâce à la contrainte UNIQUE
   await db.query(
     "INSERT IGNORE INTO favorites (user_id, playlist_id) VALUES (?, ?)",
     [userId, playlistId]

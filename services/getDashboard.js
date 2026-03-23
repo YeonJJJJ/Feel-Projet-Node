@@ -2,15 +2,13 @@ const db = require("./db");
 
 async function getDashboard(userId) {
 
-  // 1. Profil utilisateur
   const users = await db.query(
     "SELECT id, username, email, created_at FROM users WHERE id = ?",
     [userId]
   );
-  if (users.length === 0) throw new Error("Utilisateur introuvable");
+  if (users.length === 0) throw new Error("User not found");
   const profile = users[0];
 
-  // 2. Historique des moods (moods distincts utilisés, du plus récent)
   const moodHistory = await db.query(
     `SELECT DISTINCT moods.id, moods.name, moods.description,
             MAX(playlists.created_at) AS last_used
@@ -22,7 +20,6 @@ async function getDashboard(userId) {
     [userId]
   );
 
-  // 3. Playlists générées récemment (10 dernières)
   const recentPlaylists = await db.query(
     `SELECT playlists.id, playlists.name, playlists.created_at,
             moods.name AS mood_name
@@ -34,7 +31,6 @@ async function getDashboard(userId) {
     [userId]
   );
 
-  // 4. Playlists en favoris
   const favorites = await db.query(
     `SELECT playlists.id, playlists.name, playlists.created_at,
             moods.name AS mood_name

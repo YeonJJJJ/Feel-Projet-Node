@@ -1,17 +1,3 @@
-// ─────────────────────────────────────────────
-// Auth check
-// ─────────────────────────────────────────────
-async function checkAuth() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) { window.location.href = "/login"; return; }
-  try {
-    const res = await fetch(`http://localhost:3000/auth/check?userId=${user.id}`);
-    const data = await res.json();
-    if (!data.valid) { localStorage.clear(); window.location.href = "/login"; }
-  } catch (err) { console.error("Auth check error:", err); }
-}
-checkAuth();
-
 const user = JSON.parse(localStorage.getItem("user"));
 if (!user) window.location.href = "/login";
 const userId = user.id;
@@ -44,9 +30,7 @@ function getPlaylistDesc(playlist) {
   return playlistNames[playlist.id]?.description || "";
 }
 
-// ─────────────────────────────────────────────
-// Chargement du dashboard
-// ─────────────────────────────────────────────
+// Dashboard initialization
 fetch(`http://localhost:3000/dashboard/data?userId=${userId}`)
   .then(res => res.json())
   .then(data => {
@@ -85,9 +69,7 @@ fetch(`http://localhost:3000/dashboard/data?userId=${userId}`)
   })
   .catch(err => console.error("Erreur chargement dashboard :", err));
 
-// ─────────────────────────────────────────────
-// Rendu grille de playlists
-// ─────────────────────────────────────────────
+// Playlist grid rendering
 function renderPlaylistGrid(container, playlists, isFav) {
   container.innerHTML = "";
   playlists.forEach(playlist => {
@@ -114,14 +96,10 @@ function renderPlaylistGrid(container, playlists, isFav) {
   });
 }
 
-// ─────────────────────────────────────────────
-// Déconnexion
-// ─────────────────────────────────────────────
+// Logout
 logoutBtn.addEventListener("click", () => { localStorage.clear(); window.location.href = "/login"; });
 
-// ─────────────────────────────────────────────
-// Suppression de compte
-// ─────────────────────────────────────────────
+// Account deletion
 deleteBtn.addEventListener("click", () => { deleteModal.classList.add("open"); });
 cancelDelete.addEventListener("click", () => { deleteModal.classList.remove("open"); });
 confirmDelete.addEventListener("click", async () => {

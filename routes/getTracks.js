@@ -1,16 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const moodService = require("../services/getTracks");
+const playlistTracksService = require("../services/getTracks");
 
-router.get("/", async function (req, res, next) {
+router.get("/tracks", async function (req, res, next) {
   try {
 
-    const result = await moodService.getTracks();
+    const { playlistId } = req.query;
+
+    if (!playlistId) {
+      return res.status(400).json({ message: "playlistId missing" });
+    }
+
+    const result = await playlistTracksService.getPlaylistTracks(playlistId);
 
     res.json(result);
 
   } catch (err) {
-    console.error(`Error while getting tracks`, err.message);
+    console.error("Error while getting playlist tracks", err.message);
     next(err);
   }
 });

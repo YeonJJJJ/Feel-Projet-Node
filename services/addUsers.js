@@ -6,7 +6,6 @@ function hashPassword(password) {
 }
 
 async function addUser(user) {
-
   const hashedPassword = hashPassword(user.password);
 
   const result = await db.query(
@@ -16,7 +15,11 @@ async function addUser(user) {
 
   return {
     message: "User created successfully",
-    userId: result.insertId
+    user: {                         
+      id: result.insertId,
+      username: user.username,
+      email: user.email
+    }
   };
 }
 

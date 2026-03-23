@@ -1,17 +1,3 @@
-// ─────────────────────────────────────────────
-// Auth check
-// ─────────────────────────────────────────────
-async function checkAuth() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) { window.location.href = "/login"; return; }
-  try {
-    const res = await fetch(`http://localhost:3000/auth/check?userId=${user.id}`);
-    const data = await res.json();
-    if (!data.valid) { localStorage.clear(); window.location.href = "/login"; }
-  } catch (err) { console.error("Auth check error:", err); }
-}
-checkAuth();
-
 const playlistTitle = document.querySelector(".info h1");
 const playlistLabel = document.querySelector(".info .label");
 const playlistDesc  = document.querySelector(".info p");
@@ -46,9 +32,7 @@ if (displayColor) {
 
 if (backBtn) { backBtn.addEventListener("click", () => { window.location.href = "/playlist"; }); }
 
-// ─────────────────────────────────────────────
-// Favori
-// ─────────────────────────────────────────────
+// Favorite button
 function updateFavBtn(isFav) {
   favBtn.dataset.fav = isFav;
   favBtn.innerHTML = isFav ? "♥ In favorites" : "♡ Add to favorites";
@@ -76,9 +60,7 @@ favBtn.addEventListener("click", async () => {
   } catch (err) { console.error("Erreur toggle favori :", err); }
 });
 
-// ─────────────────────────────────────────────
-// Chargement des tracks
-// ─────────────────────────────────────────────
+// Tracklist loading
 fetch(`http://localhost:3000/playlists/tracks?playlistId=${playlistId}`)
   .then(res => res.json())
   .then(json => {
@@ -101,9 +83,7 @@ fetch(`http://localhost:3000/playlists/tracks?playlistId=${playlistId}`)
   })
   .catch(err => console.error("Erreur chargement tracks :", err));
 
-// ─────────────────────────────────────────────
 // Account dropdown
-// ─────────────────────────────────────────────
 const accountBtn      = document.getElementById("account-btn");
 const accountDropdown = document.getElementById("account-dropdown");
 const accountAvatar   = document.getElementById("account-avatar");

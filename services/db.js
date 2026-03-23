@@ -1,7 +1,6 @@
 const mysql = require("mysql2/promise");
 const config = require("../config");
 
-// Crée un pool unique au démarrage du serveur
 const pool = mysql.createPool({
   ...config.db,
   waitForConnections: true,

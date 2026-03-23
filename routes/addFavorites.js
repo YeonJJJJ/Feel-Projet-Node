@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const favoriteService = require("../services/addFavorites");
 
-// POST /favorites — ajouter
+// POST /favorites — add favorites
 router.post("/", async (req, res, next) => {
   try {
     const { userId, playlistId } = req.body;
-    if (!userId || !playlistId) return res.status(400).json({ message: "userId et playlistId requis" });
+    if (!userId || !playlistId) return res.status(400).json({ message: "userId and playlistId required" });
     const result = await favoriteService.addFavorite(userId, playlistId);
     res.json(result);
   } catch (err) {
@@ -14,11 +14,11 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// DELETE /favorites — retirer
+// DELETE /favorites — delete favorites
 router.delete("/", async (req, res, next) => {
   try {
     const { userId, playlistId } = req.body;
-    if (!userId || !playlistId) return res.status(400).json({ message: "userId et playlistId requis" });
+    if (!userId || !playlistId) return res.status(400).json({ message: "userId and playlistId required" });
     const result = await favoriteService.removeFavorite(userId, playlistId);
     res.json(result);
   } catch (err) {

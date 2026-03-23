@@ -2,184 +2,154 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background:
-    radial-gradient(circle at center, rgba(120,0,0,0.5), #000 60%),
+    radial-gradient(circle at center, rgba(120, 0, 0, 0.5), #000 60%),
     #000;
   color: white;
-  min-height: 100vh;
 }
 
-.page {
+.container {
+  text-align: center;
+  max-width: 900px;
   width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 60px 0;
 }
 
-/* TOP */
-
-.top-bar {
+/* Logo */
+.logo {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  margin-top : 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  font-weight: 600;
+  font-size: 22px;
 }
 
-.badge {
-  color: #ffb3c7;
-  font-size: 14px;
-  letter-spacing: 1px;
+.icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff0066, #ff4da6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
-.regen {
-  color: #ddd;
-  cursor: pointer;
+/* Title */
+h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
 }
 
-/* TITLES */
-
-.title {
-  font-size: 56px;
-  margin-bottom: 15px;
-}
-
-.title span {
+.highlight {
   background: linear-gradient(90deg, #ff0066, #ff4da6);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Subtitle */
 .subtitle {
-  color: #aaa;
-  margin-bottom: 40px;
+  color: #b3b3b3;
   font-size: 18px;
+  margin-bottom: 40px;
 }
 
-/* LOADER */
-.loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 60px 0;
+/* Input */
+.input-box {
+  margin-bottom: 16px;
 }
 
-.loader-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(255, 255, 255, 0.15);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-.loader p {
-  font-size: 14px;
-  opacity: 0.5;
-  letter-spacing: 0.05em;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* CARDS */
-
-.cards {
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
-}
-
-.card {
-  width: 220px;
-  border-radius: 16px;
-  padding: 12px;
-  cursor: pointer;
+.input-box input {
+  width: 100%;
+  padding: 20px 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 18px;
+  outline: none;
   transition: 0.3s;
 }
 
-.card img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 10px;
+.input-box input::placeholder {
+  color: #888;
 }
 
-.card h3 {
-  font-size: 18px;
-  margin-bottom: 5px;
+.input-box input:focus {
+  border-color: #ff4da6;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.card p {
-  font-size: 13px;
-  color: #ddd;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-}
-
-/* Standards Colors for cards */
-.c1 { background: #3a1621; }
-.c2 { background: #1c1a44; }
-.c3 { background: #6b5633; }
-.c4 { background: #165c3c; }
-.c5 { background: #7a1d1d; }
-
-/* PLAYLIST DETAILS */
-
-.back {
-  font-size: 30px;
-  margin-bottom: 30px;
-  cursor: pointer;
-}
-
-.playlist-header {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.cover {
-  width: 220px;
-  border-radius: 12px;
-}
-
-.info h1 {
-  font-size: 48px;
-  margin: 10px 0;
-}
-
-.label {
-  color: #aaa;
-  letter-spacing: 2px;
+.mood-suggestion {
+  display: none;
+  margin-top: 12px;
+  margin-bottom: 28px;
   font-size: 14px;
-}
-
-.info p {
-  color: #ccc;
-  font-size: 18px;
-}
-
-/* PLAY BUTTON */
-
-.play-btn {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, #ff0066, #ff4da6);
-  color: black;
-  font-size: 26px;
+  color: #b3b3b3;
   cursor: pointer;
-  margin: 30px 0;
+  transition: color 0.2s, transform 0.2s;
+  text-align: left;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 77, 166, 0.25);
+  background: rgba(255, 0, 102, 0.06);
+}
+
+.mood-suggestion:hover {
+  color: white;
+  border-color: rgba(255, 77, 166, 0.6);
+  background: rgba(255, 0, 102, 0.12);
+  transform: translateY(-1px);
+}
+
+.mood-suggestion strong {
+  color: #ff4da6;
+  font-weight: 600;
+}
+
+/* Chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.chips button {
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #d1d1d1;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.chips button:hover {
+  border-color: #ff4da6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 0, 102, 0.3);
+}
+
+.chips button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* Button logout */
@@ -204,16 +174,8 @@ body {
   background: rgba(255, 0, 102, 0.08);
 }
 
-.home-btn {
-  border-color: rgba(255, 77, 166, 0.5);
-  color: #ffb3c7;
-  background: rgba(255, 0, 102, 0.08);
-  cursor : pointer;
-  text-decoration: underline;
-  
-}
 
-/* ACCES DASHBOARD */
+/* ---------- ACCES DASHBOARD ---------- */
 
 .account-menu {
   position: fixed;

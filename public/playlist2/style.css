@@ -20,7 +20,7 @@ body {
   padding: 60px 0;
 }
 
-/* ---------- TOP ---------- */
+/* TOP */
 
 .top-bar {
   display: flex;
@@ -39,7 +39,7 @@ body {
   cursor: pointer;
 }
 
-/* ---------- TITLES ---------- */
+/* TITLES */
 
 .title {
   font-size: 56px;
@@ -59,7 +59,7 @@ body {
   font-size: 18px;
 }
 
-/* ---------- CARDS ---------- */
+/* CARDS */
 
 .cards {
   display: flex;
@@ -95,14 +95,14 @@ body {
   transform: translateY(-6px);
 }
 
-/* Colors */
+/* Standards Colors for cards */
 .c1 { background: #3a1621; }
 .c2 { background: #1c1a44; }
 .c3 { background: #6b5633; }
 .c4 { background: #165c3c; }
 .c5 { background: #7a1d1d; }
 
-/* ---------- PLAYLIST DETAIL ---------- */
+/* PLAYLIST DETAILS */
 
 .back {
   font-size: 30px;
@@ -138,7 +138,7 @@ body {
   font-size: 18px;
 }
 
-/* ---------- PLAY BUTTON ---------- */
+/* PLAY BUTTON */
 
 .play-btn {
   width: 70px;
@@ -152,7 +152,7 @@ body {
   margin: 30px 0;
 }
 
-/* ---------- TABLE ---------- */
+/* TABLE */
 
 .tracklist {
   width: 100%;
@@ -184,7 +184,7 @@ body {
   background: rgba(255,255,255,0.05);
 }
 
-/* Bouton déconnexion */
+/* Button logout */
 .logout {
   position: fixed;
   top: 24px;
@@ -233,7 +233,7 @@ body {
   margin-bottom: 24px;
 }
 
-/* ---------- DASHBOARD ---------- */
+/* ACCES DASHBOARD */
 
 .account-menu {
   position: fixed;

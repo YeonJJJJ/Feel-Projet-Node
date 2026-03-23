@@ -67,8 +67,6 @@ const queries = [
 
 con.connect(err => {
     if (err) throw err;
-    console.log("Connected");
-
     queries.forEach(sql => {
         con.query(sql, err => {
             if (err) throw err;

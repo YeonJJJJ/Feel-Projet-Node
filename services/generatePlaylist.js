@@ -2,9 +2,7 @@ const axios = require("axios");
 const config = require("../config");
 const db = require("./db");
 
-// ─────────────────────────────────────────────
-// Queries Spotify par mood (5 par mood)
-// ─────────────────────────────────────────────
+// 5 queries per mood to get a good variety of tracks from Spotify
 const MOOD_QUERIES = {
   Happy:        ["happy pop funk soul", "feel good dance disco", "cheerful indie pop upbeat", "good vibes rnb summer", "joyful acoustic pop"],
   Sad:          ["sad indie folk acoustic", "heartbreak blues emotional", "melancholic singer-songwriter", "crying playlist emo indie", "soft sad ballad"],
@@ -16,15 +14,10 @@ const MOOD_QUERIES = {
   Focus:        ["classical ambient piano focus", "lofi post rock study beats", "instrumental ambient concentration", "deep focus piano classical", "study music lofi ambient"],
   Motivational: ["hip hop rock gospel motivational", "pump up rock electronic inspire", "motivational anthem hip hop", "never give up rock gospel", "success hip hop electronic"],
   Melancholy:   ["indie folk acoustic melancholy", "blues ambient indie soft", "folk acoustic introspective", "quiet sad indie ambient", "melancholic singer-songwriter blues"],
-  Adventure:    ["soundtrack post rock world music", "folk rock adventure travel", "epic post rock cinematic", "world music folk exploration", "cinematic soundtrack journey"],
   Sleepy:       ["ambient classical sleep calm", "piano acoustic lullaby soft", "new age ambient peaceful night", "sleeping music calm piano", "soft classical ambient relax"],
-  Groovy:       ["funk soul disco groove", "rnb jazz funk rhythm bass", "soul funk groovy smooth", "disco funk jazz bass", "groove soul rnb funky"],
-  Workout:      ["hard rock electronic hip hop workout", "metal drum bass gym training", "hip hop rock cardio fitness", "electronic hard rock intense workout", "drum bass metal hip hop energy"],
 };
 
-// ─────────────────────────────────────────────
-// Token Spotify
-// ─────────────────────────────────────────────
+// get Spotify token using Client Credentials Flow
 async function getSpotifyToken() {
   try {
     const response = await axios.post(
@@ -45,9 +38,7 @@ async function getSpotifyToken() {
   }
 }
 
-// ─────────────────────────────────────────────
-// Recherche tracks Spotify
-// ─────────────────────────────────────────────
+// Searching for tracks on Spotify using the Search API
 async function searchTracks(token, query) {
   try {
     const response = await axios.get("https://api.spotify.com/v1/search", {
@@ -61,9 +52,7 @@ async function searchTracks(token, query) {
   }
 }
 
-// ─────────────────────────────────────────────
-// Sauvegarde une track en DB
-// ─────────────────────────────────────────────
+// Save the tracks in the database and return their IDs
 async function saveTrack(track) {
   const existing = await db.query(
     "SELECT id FROM tracks WHERE spotify_id = ?",
@@ -78,9 +67,7 @@ async function saveTrack(track) {
   return result.insertId;
 }
 
-// ─────────────────────────────────────────────
-// Rafraîchit les tracks d'une playlist
-// ─────────────────────────────────────────────
+// Refresh the tracks of an existing playlist (function)
 async function refreshPlaylistTracks(playlistId, moodId, tracks) {
   await db.query("DELETE FROM playlists_tracks WHERE playlist_id = ?", [playlistId]);
 
@@ -91,9 +78,7 @@ async function refreshPlaylistTracks(playlistId, moodId, tracks) {
   }
 }
 
-// ─────────────────────────────────────────────
-// Fonction principale
-// ─────────────────────────────────────────────
+// Main function to generate playlists based on mood
 async function generatePlaylist(userId, moodId) {
 
   const moods = await db.query("SELECT * FROM moods WHERE id = ?", [moodId]);
@@ -110,7 +95,7 @@ async function generatePlaylist(userId, moodId) {
 
   const token = await getSpotifyToken();
 
-  // Playlists existantes → rafraîchit les tracks
+  // To refresh playlists 
   if (existing.length >= 5) {
     for (let i = 0; i < 5; i++) {
       const spotifyTracks = await searchTracks(token, queries[i]);
@@ -120,7 +105,7 @@ async function generatePlaylist(userId, moodId) {
     return { mood: mood.name, moodId };
   }
 
-  // Pas de playlists → les crée avec noms neutres
+  // If no playlist exists for this mood, we create new ones until we have 5
   for (let i = 0; i < 5; i++) {
     const playlistName = `${mood.name} Playlist #${i + 1}`;
     console.log(`Création "${playlistName}"`);

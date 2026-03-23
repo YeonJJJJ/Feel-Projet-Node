@@ -13,7 +13,7 @@ body {
   color: white;
 }
 
-/* ─── Header ─── */
+/* Header */
 .dash-header {
   display: flex;
   justify-content: space-between;
@@ -79,7 +79,7 @@ body {
   background: rgba(255,0,102,0.1);
 }
 
-/* ─── Main ─── */
+/* Main */
 .dash-main {
   max-width: 1100px;
   margin: 0 auto;
@@ -89,7 +89,7 @@ body {
   gap: 48px;
 }
 
-/* ─── Sections ─── */
+/* Sections */
 .dash-section {
   display: flex;
   flex-direction: column;
@@ -104,7 +104,7 @@ body {
   padding-left: 12px;
 }
 
-/* ─── Profil ─── */
+/* Profile */
 .profile-section {
   flex-direction: row !important;
   align-items: center;
@@ -150,7 +150,7 @@ body {
   display: block;
 }
 
-/* ─── Mood chips ─── */
+/* Mood chips */
 .mood-chips {
   display: flex;
   flex-wrap: wrap;
@@ -173,7 +173,7 @@ body {
   color: white;
 }
 
-/* ─── Playlist grid ─── */
+/* Playlist grid */
 .playlist-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -239,7 +239,7 @@ body {
   font-size: 14px;
 }
 
-/* ─── Danger button ─── */
+/* Button to delete account */
 .btn-danger {
   padding: 8px 16px;
   border-radius: 999px;
@@ -256,7 +256,7 @@ body {
   background: rgba(255,60,60,0.1);
 }
 
-/* ─── Modal ─── */
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -314,7 +314,7 @@ body {
   color: white;
 }
 
-/* ─── Empty state ─── */
+/* Empty state */
 .empty {
   color: #555;
   font-size: 14px;

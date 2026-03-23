@@ -1,23 +1,4 @@
-// ─────────────────────────────────────────────
-// Auth check — tout le code est dans init()
-// ─────────────────────────────────────────────
-async function checkAuth() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) { window.location.href = "/login"; return false; }
-  try {
-    const res = await fetch(`http://localhost:3000/auth/check?userId=${user.id}`);
-    const data = await res.json();
-    if (!data.valid) { localStorage.clear(); window.location.href = "/login"; return false; }
-    return true;
-  } catch (err) {
-    console.error("Auth check error:", err);
-    return true; // En cas d'erreur réseau, on laisse passer
-  }
-}
-
-// ─────────────────────────────────────────────
-// Images prédéfinies par nom de playlist
-// ─────────────────────────────────────────────
+// Defined images for each playlist name to ensure consistency and avoid relying on random picsum images.
 const PLAYLIST_IMAGES = {
   // Happy
   "Golden Hour":          "https://picsum.photos/seed/golden-hour/300/300",
@@ -128,17 +109,6 @@ const PLAYLIST_IMAGES = {
   "Understated":          "https://picsum.photos/seed/understated/300/300",
   "Washed Out":           "https://picsum.photos/seed/washed-out/300/300",
   "Slow Dissolve":        "https://picsum.photos/seed/slow-dissolve/300/300",
-  // Adventure
-  "Into The Unknown":     "https://picsum.photos/seed/into-unknown/300/300",
-  "Open Road":            "https://picsum.photos/seed/open-road/300/300",
-  "Horizon Chaser":       "https://picsum.photos/seed/horizon/300/300",
-  "Uncharted":            "https://picsum.photos/seed/uncharted/300/300",
-  "Wanderlust":           "https://picsum.photos/seed/wanderlust/300/300",
-  "Trailblazer":          "https://picsum.photos/seed/trailblazer/300/300",
-  "Last Known Position":  "https://picsum.photos/seed/last-position/300/300",
-  "First Light":          "https://picsum.photos/seed/first-light/300/300",
-  "Elevation":            "https://picsum.photos/seed/elevation/300/300",
-  "Edge of the Map":      "https://picsum.photos/seed/edge-map/300/300",
   // Sleepy
   "Drift Away":           "https://picsum.photos/seed/drift-away/300/300",
   "Stargazing":           "https://picsum.photos/seed/stargazing/300/300",
@@ -150,30 +120,9 @@ const PLAYLIST_IMAGES = {
   "Night Mode":           "https://picsum.photos/seed/night-mode/300/300",
   "Half Dreaming":        "https://picsum.photos/seed/half-dream/300/300",
   "Goodnight":            "https://picsum.photos/seed/goodnight/300/300",
-  // Groovy
-  "Silk & Bass":          "https://picsum.photos/seed/silk-bass/300/300",
-  "Head Nodder":          "https://picsum.photos/seed/head-nodder/300/300",
-  "Velvet Underground":   "https://picsum.photos/seed/velvet-underground/300/300",
-  "Pocket Rocket":        "https://picsum.photos/seed/pocket-rocket/300/300",
-  "The Good Stuff":       "https://picsum.photos/seed/good-stuff/300/300",
-  "Butter":               "https://picsum.photos/seed/butter-smooth/300/300",
-  "Soulful Sunday":       "https://picsum.photos/seed/soulful-sun/300/300",
-  "Low & Slow":           "https://picsum.photos/seed/low-slow/300/300",
-  "In The Pocket":        "https://picsum.photos/seed/in-pocket/300/300",
-  "Wax & Vinyl":          "https://picsum.photos/seed/wax-vinyl/300/300",
-  // Workout
-  "Beast Mode":           "https://picsum.photos/seed/beast-mode/300/300",
-  "No Pain No Gain":      "https://picsum.photos/seed/no-pain/300/300",
-  "Iron Will":            "https://picsum.photos/seed/iron-will/300/300",
-  "Sweat It Out":         "https://picsum.photos/seed/sweat-out/300/300",
-  "Last Set":             "https://picsum.photos/seed/last-set/300/300",
-  "PR Day":               "https://picsum.photos/seed/pr-day/300/300",
-  "Grind Season":         "https://picsum.photos/seed/grind-season/300/300",
-  "Tempo":                "https://picsum.photos/seed/tempo-run/300/300",
-  "Raw":                  "https://picsum.photos/seed/raw-energy/300/300",
-  "Max Effort":           "https://picsum.photos/seed/max-effort/300/300",
 };
 
+// Generating playlist names propositions based on the mood
 const MOOD_NAMES = {
   Happy:        ["Golden Hour", "Dancing In The Rain", "Sunday Morning", "Vitamin", "Feels Like Summer", "Bright Side", "Smile Files", "Good News Only", "Confetti", "Peak Happiness"],
   Sad:          ["Empty Rooms", "3AM Thoughts", "Glass Half Empty", "After The Storm", "Quiet Tears", "Blue Hour", "Unread Messages", "Rain On Glass", "Hollow", "Overcast"],
@@ -191,6 +140,7 @@ const MOOD_NAMES = {
   Workout:      ["Beast Mode", "No Pain No Gain", "Iron Will", "Sweat It Out", "Last Set", "PR Day", "Grind Season", "Tempo", "Raw", "Max Effort"],
 };
 
+// Generating playlist descriptions propositions based on the mood
 const MOOD_DESCRIPTIONS = {
   Happy:        ["Warm tones and feel-good beats.", "When joy hits harder than the weather.", "Slow starts and good vibes only.", "Pure sunshine, no prescription needed.", "Windows down, volume up.", "Every track a reminder that things are good.", "The playlist you come back to when you need a lift.", "No sad songs allowed in here.", "Celebrate nothing. Celebrate everything.", "This is what joy sounds like."],
   Sad:          ["For when the silence gets too loud.", "The songs that understand you tonight.", "Honest music for honest feelings.", "You're allowed to feel this.", "Soft songs for heavy hearts.", "When the day ends and the ache begins.", "For everything left unsaid.", "Melancholy never sounded so beautiful.", "Some feelings need the right soundtrack.", "Grey days deserve grey music."],
@@ -208,6 +158,7 @@ const MOOD_DESCRIPTIONS = {
   Workout:      ["You showed up. Now perform.", "The burn means it's working.", "Mind over everything.", "Every drop earned.", "The hardest one is always the last.", "Today you break your own record.", "Not every day is easy. Show up anyway.", "Match the music. Match the pace.", "Unfiltered. Unpolished. Unstoppable.", "Leave nothing in the tank."],
 };
 
+// Generating colors for the playlist cards based on the mood
 const MOOD_COLORS = {
   Happy:        ["#c8860a", "#d4720f", "#b87d10", "#c9900c", "#bf7a0e"],
   Sad:          ["#2d4a7a", "#1e3a6e", "#2a4575", "#253f72", "#1f3d70"],
@@ -225,6 +176,7 @@ const MOOD_COLORS = {
   Workout:      ["#b03a1a", "#a83018", "#b84018", "#ac341a", "#b03818"],
 };
 
+// Generating the datas of the playlists
 function getDisplayData(moodName, count) {
   const storageKey = `displayData_${moodName}`;
   const stored = localStorage.getItem(storageKey);
@@ -252,13 +204,6 @@ function storePlaylistData(playlistId, imgSrc, name, description) {
   names[playlistId] = { name, description };
   localStorage.setItem("playlistNames", JSON.stringify(names));
 }
-
-// ─────────────────────────────────────────────
-// Init — tout s'exécute après auth check
-// ─────────────────────────────────────────────
-async function init() {
-  const valid = await checkAuth();
-  if (!valid) return;
 
   const moodNameSpan   = document.querySelector(".mood-name");
   const cardsContainer = document.getElementById("cards");
@@ -291,7 +236,7 @@ async function init() {
 
   async function renderPlaylists(playlists) {
     cardsContainer.innerHTML = "";
-    if (!playlists || playlists.length === 0) { cardsContainer.innerHTML = "<p>Aucune playlist disponible.</p>"; hideLoader(); return; }
+    if (!playlists || playlists.length === 0) { cardsContainer.innerHTML = "<p>No playlists available.</p>"; hideLoader(); return; }
     const displayData = getDisplayData(moodName, playlists.length);
     for (let index = 0; index < playlists.length; index++) {
       const playlist = playlists[index];
@@ -335,6 +280,3 @@ async function init() {
   });
 
   loadPlaylists();
-}
-
-init();

@@ -1,28 +1,3 @@
-/*
-let mysql = require("mysql");
-let config = require("../config");
-
-let con = mysql.createConnection(config.db);
-
-const fillTable = `
-INSERT INTO users
-(username, email, password) 
-VALUES ('random','random@example.com','password123');
-`
-
-con.connect(err => {
-    if (err) throw err;
-    console.log("Connected to database");
-
-    con.query(fillTable, (err, result) => {
-        if (err) throw err;
-        console.log("Table users filled");
-        con.end();
-    });
-});
-
-*/
-
 const mysql = require("mysql");
 const config = require("../config");
 
@@ -41,17 +16,12 @@ INSERT INTO moods (name, description) VALUES
 ('Focus', 'Music that helps you concentrate and study'),
 ('Motivational', 'Tracks to inspire and pump you up'),
 ('Melancholy', 'Soft and emotional songs to reflect'),
-('Adventure', 'Epic tracks for exploration and travel vibes'),
-('Sleepy', 'Calm tracks to help relax or fall asleep'),
-('Groovy', 'Funky and rhythmic tracks for a good vibe'),
-('Workout', 'Energetic music for exercise and fitness');`,
+('Sleepy', 'Calm tracks to help relax or fall asleep');`,
 
 ];
 
 con.connect(err => {
     if (err) throw err;
-    console.log("Connected");
-
     queries.forEach(sql => {
         con.query(sql, err => {
             if (err) throw err;

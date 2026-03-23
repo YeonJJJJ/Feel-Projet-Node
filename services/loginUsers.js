@@ -19,7 +19,6 @@ async function login(user) {
     };
   }
 
-  // On ne renvoie jamais le mot de passe au front
   const { password, ...userWithoutPassword } = rows[0];
 
   return {

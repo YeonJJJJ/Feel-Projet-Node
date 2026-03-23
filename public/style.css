@@ -68,7 +68,7 @@ h1 {
 
 /* Input */
 .input-box {
-  margin-bottom: 16px;
+  margin-bottom: 40px;
 }
 
 .input-box input {
@@ -92,50 +92,21 @@ h1 {
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* Suggestion en temps réel */
-.mood-suggestion {
-  display: none;
-  margin-top: 12px;
-  margin-bottom: 28px;
-  font-size: 14px;
-  color: #b3b3b3;
-  cursor: pointer;
-  transition: color 0.2s, transform 0.2s;
-  text-align: left;
-  padding: 12px 18px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 77, 166, 0.25);
-  background: rgba(255, 0, 102, 0.06);
-}
-
-.mood-suggestion:hover {
-  color: white;
-  border-color: rgba(255, 77, 166, 0.6);
-  background: rgba(255, 0, 102, 0.12);
-  transform: translateY(-1px);
-}
-
-.mood-suggestion strong {
-  color: #ff4da6;
-  font-weight: 600;
-}
-
 /* Chips */
 .chips {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 48px;
+  gap: 16px;
 }
 
 .chips button {
-  padding: 12px 20px;
+  padding: 14px 20px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   background: transparent;
   color: #d1d1d1;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   transition: 0.25s;
 }
@@ -147,114 +118,100 @@ h1 {
   box-shadow: 0 0 20px rgba(255, 0, 102, 0.3);
 }
 
-.chips button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
-}
 
-/* Bouton déconnexion */
-.logout {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: #b3b3b3;
-  font-size: 13px;
-  cursor: pointer;
-  transition: 0.25s;
-  letter-spacing: 0.03em;
-}
+/* AUTH */
 
-.logout:hover {
-  border-color: rgba(255, 77, 166, 0.5);
-  color: #ff4da6;
-  background: rgba(255, 0, 102, 0.08);
-}
-
-
-/* ---------- DASHBOARD ---------- */
-
-.account-menu {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 50;
-}
- 
-.account-btn {
+.auth-container {
+  min-height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
+
+  background:
+    radial-gradient(circle at center, rgba(120,0,0,0.5), #000 60%),
+    #000;
+}
+
+.auth-card {
+  width: 420px;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+.auth-card h1 {
+  font-size: 32px;
+  margin: 20px 0 10px;
+}
+
+.auth-sub {
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group input, .input-group input:hover {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.15);
   background: rgba(255,255,255,0.05);
   color: white;
-  font-size: 13px;
-  cursor: pointer;
-  transition: 0.2s;
+  font-size: 16px;
+  outline: none;
 }
- 
-.account-btn:hover {
-  border-color: rgba(255,77,166,0.5);
-  background: rgba(255,0,102,0.08);
+
+.input-group input:focus {
+  border-color: #ff4da6;
 }
- 
-.account-avatar {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff0066, #ff4da6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-}
- 
-.account-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  background: #1a1a1a;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  overflow: hidden;
-  min-width: 160px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
- 
-.account-dropdown.open {
-  display: block;
-}
- 
-.account-dropdown a,
-.account-dropdown .logout-item {
-  display: block;
-  padding: 12px 16px;
-  font-size: 14px;
-  color: #d1d1d1;
-  text-decoration: none;
-  cursor: pointer;
-  transition: 0.15s;
-  background: transparent;
-  border: none;
+
+/* Buttons */
+
+.btn-primary {
   width: 100%;
-  text-align: left;
-}
- 
-.account-dropdown a:hover,
-.account-dropdown .logout-item:hover {
-  background: rgba(255,255,255,0.06);
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(90deg, #ff0066, #ff4da6);
   color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
 }
- 
-.account-dropdown .logout-item {
-  border-top: 1px solid rgba(255,255,255,0.06);
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255,0,102,0.4);
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.divider {
+  margin: 25px 0;
+  color: #666;
+}
+
+.switch {
+  margin-top: 20px;
+  color: #aaa;
+}
+
+.switch a {
   color: #ff4da6;
+  text-decoration: none;
 }
