@@ -6,7 +6,7 @@ const PLAYLIST_IMAGES = {
   "Sunday Morning":       "https://picsum.photos/seed/sunday-morning/300/300",
   "Vitamin D":            "https://picsum.photos/seed/vitamin-d/300/300",
   "Feels Like Summer":    "https://picsum.photos/seed/feels-summer/300/300",
-  "Bright Side":          "https://picsum.photos/seed/bright-side/300/300",
+  "Bright Light":          "https://picsum.photos/seed/bright-side/300/300",
   "Smile File":           "https://picsum.photos/seed/smile-file/300/300",
   "Good News Only":       "https://picsum.photos/seed/good-news/300/300",
   "Confetti":             "https://picsum.photos/seed/confetti-party/300/300",
