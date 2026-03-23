@@ -134,10 +134,7 @@ const MOOD_NAMES = {
   Focus:        ["Deep Work", "Flow State", "Brain Fuel", "The Zone", "Locked In", "Signal / Noise", "Render Farm", "White Room", "Tunnel Vision", "Loading..."],
   Motivational: ["Rise & Grind", "No Excuses", "Comeback Kid", "Prove Them Wrong", "One More Rep", "Underdog", "Level Up", "Built Different", "Relentless", "Zero To One"],
   Melancholy:   ["Soft Echoes", "Grey Skies", "The Long Way Home", "Bittersweet", "Hollow", "Fog", "Off Season", "Understated", "Washed Out", "Slow Dissolve"],
-  Adventure:    ["Into The Unknown", "Open Road", "Horizon Chaser", "Uncharted", "Wanderlust", "Trailblazer", "Last Known Position", "First Light", "Elevation", "Edge of the Map"],
   Sleepy:       ["Drift Away", "Stargazing", "Counting Clouds", "Pillow Talk", "Last Light", "Slowdown", "Dissolve", "Night Mode", "Half Dreaming", "Goodnight"],
-  Groovy:       ["Silk & Bass", "Head Nodder", "Velvet Underground", "Pocket Rocket", "The Good Stuff", "Butter", "Soulful Sunday", "Low & Slow", "In The Pocket", "Wax & Vinyl"],
-  Workout:      ["Beast Mode", "No Pain No Gain", "Iron Will", "Sweat It Out", "Last Set", "PR Day", "Grind Season", "Tempo", "Raw", "Max Effort"],
 };
 
 // Generating playlist descriptions propositions based on the mood
@@ -152,10 +149,7 @@ const MOOD_DESCRIPTIONS = {
   Focus:        ["Distraction is not invited here.", "When hours feel like minutes.", "Feed your focus.", "You're in it. Stay there.", "Phone face down. Headphones on.", "Cut out everything that doesn't matter.", "Let your brain do its best work.", "Clean space, clean mind, clear output.", "One task. One playlist. One result.", "Processing. Please do not disturb."],
   Motivational: ["The alarm went off. Now it's time.", "Every reason you had is now invalid.", "They counted you out. Big mistake.", "Let the results do the talking.", "You always had one more in you.", "No one believed in you. You did.", "The version of you that didn't quit.", "You weren't made to give up.", "Tired is not the same as done.", "Every great thing started like this."],
   Melancholy:   ["Tracks that quietly stay with you.", "Not sad exactly. Just somewhere between.", "You took the scenic route on purpose.", "Good things that ended too soon.", "The feeling you can't quite name.", "Everything is slightly muffled today.", "When the world moves on and you haven't.", "Quiet music for quiet feelings.", "Faded colours, faded sounds.", "Letting go, note by note."],
-  Adventure:    ["No map. No plan. Perfect.", "Miles ahead. Nothing behind.", "The destination is not the point.", "Where the trail runs out, you begin.", "The itch you can only scratch by leaving.", "Someone had to go first.", "Somewhere out there, living it.", "Before anyone else is awake.", "Higher ground. Clearer view.", "Here be dragons. Go anyway."],
   Sleepy:       ["Let the music carry you under.", "Eyes heavy. Sky full.", "Soft enough to sleep through.", "The last sounds before silence.", "The day is done. Rest now.", "Your body already knows what it needs.", "Everything softens at the edges.", "Screen off. Mind off. Music on.", "Between here and somewhere softer.", "The last playlist you'll need tonight."],
-  Groovy:       ["Smooth enough to slide on.", "You won't even notice you're moving.", "Rich, warm, and deeply satisfying.", "Tight groove. Big impact.", "No filler. Pure feel.", "Everything just glides.", "The perfect groove for doing nothing.", "The best things don't rush.", "Right in the sweet spot.", "The kind of music you can feel."],
-  Workout:      ["You showed up. Now perform.", "The burn means it's working.", "Mind over everything.", "Every drop earned.", "The hardest one is always the last.", "Today you break your own record.", "Not every day is easy. Show up anyway.", "Match the music. Match the pace.", "Unfiltered. Unpolished. Unstoppable.", "Leave nothing in the tank."],
 };
 
 // Generating colors for the playlist cards based on the mood
@@ -170,10 +164,7 @@ const MOOD_COLORS = {
   Focus:        ["#2a3a7a", "#223070", "#283875", "#203570", "#263a78"],
   Motivational: ["#b86010", "#c0680e", "#b05c10", "#bc640c", "#b05e10"],
   Melancholy:   ["#4a3870", "#402e68", "#4c3a72", "#3e2e66", "#463570"],
-  Adventure:    ["#1a6e2a", "#186428", "#1c6e2c", "#166026", "#1a682a"],
   Sleepy:       ["#2a3a6e", "#223068", "#283870", "#203265", "#26386c"],
-  Groovy:       ["#a07010", "#986808", "#a87210", "#9e6c0c", "#a06e10"],
-  Workout:      ["#b03a1a", "#a83018", "#b84018", "#ac341a", "#b03818"],
 };
 
 // Generating the datas of the playlists

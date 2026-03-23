@@ -24,7 +24,7 @@ async function login(e) {
 
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      window.location.href = "../index.html";
+      window.location.href = "../home";
 
     } else {
       alert(data.message);
