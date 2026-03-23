@@ -124,7 +124,7 @@ const PLAYLIST_IMAGES = {
 
 // Generating playlist names propositions based on the mood
 const MOOD_NAMES = {
-  Happy:        ["Golden Hour", "Dancing In The Rain", "Sunday Morning", "Vitamin", "Feels Like Summer", "Bright Side", "Smile Files", "Good News Only", "Confetti", "Peak Happiness"],
+  Happy:        ["Golden Hour", "Dancing In The Rain", "Sunday Morning", "Vitamin", "Feels Like Summer", "Bright light", "Smile File", "Good News Only", "Confetti", "Peak Happiness"],
   Sad:          ["Empty Rooms", "3AM Thoughts", "Glass Half Empty", "After The Storm", "Quiet Tears", "Blue Hour", "Unread Messages", "Rain On Glass", "Hollow", "Overcast"],
   Energetic:    ["Full Send", "Overdrive", "No Sleep Tonight", "Adrenaline Rush", "Chaos Theory", "Red Line", "Static", "Ignition", "Wired", "Maximum Output"],
   Nostalgic:    ["Faded Polaroids", "My First MP3s", "Burned CDs", "Summer of 99", "Analog Memories", "Old Bookmarks", "Rewind", "Disposable Camera", "Lost Frequencies", "Childhood Bedroom"],
