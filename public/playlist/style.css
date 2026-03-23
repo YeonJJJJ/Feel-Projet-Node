@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -45,6 +45,7 @@ body {
 .title {
   font-size: 56px;
   margin-bottom: 15px;
+  font-family : "Archivo Black", sans-serif;
 }
 
 .title span {
